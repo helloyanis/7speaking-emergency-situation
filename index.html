@@ -2,54 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Popup Monitor</title>
+  <title>Popup Launcher</title>
 </head>
 <body>
   <button id="notifyBtn">Request Notification Permission</button>
   <button id="popupBtn">Open Popup</button>
 
   <script>
-    let popupWindow = null;
-    let reloadInterval = null;
-
     document.getElementById('notifyBtn').addEventListener('click', () => {
       Notification.requestPermission().then(permission => {
         if (permission === "granted") {
           new Notification("Notifications enabled!");
-        }else{
-            alert("Notifications are not enabled. Please allow notifications in your browser settings.");
         }
       });
     });
 
     document.getElementById('popupBtn').addEventListener('click', () => {
-      const popupUrl = "https://user.7speaking.com/home";
-      const popupFeatures = "width=800,height=600,noreferrer";
-
-      // Open or focus the popup
-      if (!popupWindow || popupWindow.closed) {
-        popupWindow = window.open(popupUrl, "popupWindow", popupFeatures);
-
-        // Set up re-open every 60 seconds
-        reloadInterval = setInterval(() => {
-          if (popupWindow && !popupWindow.closed) {
-            popupWindow.location.src = popupUrl;
-            console.log("Popup reopened");
-          } else {
-            clearInterval(reloadInterval);
-            notify("Popup closed", "The monitored popup window has been closed.");
-          }
-        }, 10000);
-      } else {
-        popupWindow.focus();
-      }
+      const popupUrl = "popup.html"; // Same-origin popup page
+      const popupFeatures = "width=800,height=600";
+      const popupWindow = window.open(popupUrl, "popupWindow", popupFeatures);
     });
-
-    function notify(title, body) {
-      if (Notification.permission === "granted") {
-        new Notification(title, { body });
-      }
-    }
   </script>
 </body>
 </html>
