@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%;">
 <head>
-  <meta charset="UTF-8" />
-  <title>Popup Launcher</title>
+  <meta charset="UTF-8">
+  <title>😡 7️⃣</title>
 </head>
-<body>
-  <button id="notifyBtn">Request Notification Permission</button>
-  <button id="popupBtn">Open Popup</button>
+<body style="margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%;">
+  <iframe src="https://user.7speaking.com/home" width="100%" height="100%"></iframe>
 
   <script>
-    document.getElementById('notifyBtn').addEventListener('click', () => {
-      Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-          new Notification("Notifications enabled!");
-        }
-      });
-    });
-
-    document.getElementById('popupBtn').addEventListener('click', () => {
-      const popupUrl = "popup.html"; // Same-origin popup page
-      const popupFeatures = "width=800,height=600";
-      const popupWindow = window.open(popupUrl, "popupWindow", popupFeatures);
-    });
+    // Reload this whole popup every 60 seconds
+    setTimeout(() => {
+      location.reload();
+    }, 60000);
   </script>
 </body>
 </html>
